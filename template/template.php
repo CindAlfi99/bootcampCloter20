@@ -27,7 +27,7 @@
           <a class="nav-link" href="listdistributor.php">Distributor</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="product/detail.php">Product</a>
+          <a class="nav-link" href="#">Product</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Keluar</a>
