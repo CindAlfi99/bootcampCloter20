@@ -5,9 +5,7 @@
 JOIN distributor
 ON product.id_distribusi = distributor.id
 WHERE product.id=$id");
-if(!isset($_SESSION['cek'])){
-  header("Location: ../home.php");
-}
+
 
 ?>
 <!DOCTYPE html>
