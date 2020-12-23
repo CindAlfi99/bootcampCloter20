@@ -3,10 +3,10 @@ session_start();
 require '../conn.php';
 if(isset($_GET['id'])){
 $id = $_GET['id'];
-$query = mysqli_query($conn, "DELETE FROM distributor WHERE id=$id");
+$query = mysqli_query($conn, "DELETE FROM product WHERE id=$id");
 if($query){
-    $_SESSION['delete'] = true;
-    echo  "<script>window.location ='../listdistributor.php' </script> ";
+    
+    echo  "<script>window.location ='../home.php' </script> ";
 
 }
 }else{

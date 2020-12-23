@@ -4,7 +4,7 @@
      $query = mysqli_query($conn, "SELECT * FROM product 
 JOIN distributor
 ON product.id_distribusi = distributor.id
-WHERE product.id=$id");
+WHERE distributor.id=$id");
 
 
 ?>

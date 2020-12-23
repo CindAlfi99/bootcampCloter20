@@ -32,7 +32,7 @@ ON product.id_distribusi = distributor.id");
 <?php while ($row = mysqli_fetch_assoc($query)):  ?>
   <div class="col-3 mt-5">
   <div class="card " style="width: 18rem;">
-  <img src="img/<?= $row['photos']?>" class="card-img-top" >
+  <img src="product/img/<?= $row['photos']?>" class="card-img-top" >
   <div class="card-body">
     <h5 class="card-title"><?= $row['namesP'] ?></h5>
     <p class="card-text"><?= $row['names']?></p>
