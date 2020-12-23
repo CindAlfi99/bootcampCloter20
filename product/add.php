@@ -46,8 +46,13 @@ if(isset($_POST['submit'])){
       exit;
     }
     //lolos cek
+    //generate nama gambar baru
+    
+    $namaFileBaru = uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstendGambar;
    
-    move_uploaded_file($tmpName,'img/'.$namaFile);
+    move_uploaded_file($tmpName,'img/'.$namaFileBaru);
     echo "<script>alert('data berhasil ditambah')</script>";
     // return $namaFile;
     
@@ -59,7 +64,7 @@ if(isset($_POST['submit'])){
 //   echo "<script>alert('bukan gambar')</script>";
 //   return false;
    
-}
+// }
 
 
 $desc = $_POST['description'];
@@ -67,7 +72,7 @@ $nutrisi = $_POST['nutrisi'];
 $porsi = $_POST['porsi'];
 $iddist = $_POST['iddist'];
 
-    $query = mysqli_query($conn, "INSERT INTO product VALUES('','$name','$namaFile','$desc','$nutrisi','$porsi','$iddist')");
+    $query = mysqli_query($conn, "INSERT INTO product VALUES('','$name','$namaFileBaru','$desc','$nutrisi','$porsi','$iddist')");
 //     echo 'berhasil';
     if(isset($query)) {
      $_SESSION['add'] = true;
@@ -76,6 +81,7 @@ $iddist = $_POST['iddist'];
   header('Location: ../home.php');
 }
     }
+  }
   
 }
 ?>
