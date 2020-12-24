@@ -12,21 +12,66 @@ if(isset($_POST['submit'])){
   // exit;
   $id = $_GET['id'];
   $name = $_POST['name'];
-$image = $_POST['foto'];
-$desc = $_POST['description'];
+  $image = $_FILES['foto']['name'];
+  $imagesEror = $_FILES['foto']['error'];
+  $imageLama = $_POST['gambarLama'];
+  //cek apakah user memilih gambar baru atau tidak
+  $ukuranFile = $_FILES['foto']['size'];
+  $tmpName = $_FILES['foto']['tmp_name'];  
+  $ektendGambarValid = ['jpg','jpeg','png'];
+  $ekstendGambar = explode('.',$image);
+  $ekstendGambar = strtolower(end($ekstendGambar));
+  //batas
+  $desc = $_POST['description'];
 $nutrisi = $_POST['nutrisi'];
 $porsi = $_POST['porsi'];
 $iddist = $_POST['iddist'];
+  if($imagesEror==4){
+    $image = $imageLama;
     $query = mysqli_query($conn, "UPDATE product SET namesP = '$name', photos = '$image', descc ='$desc',nutrisi ='$nutrisi',serving_size ='$porsi',id_distribusi ='$iddist' WHERE id=$id");
-//     echo 'berhasil';
+    if (mysqli_affected_rows($conn) > 0) {
+      echo "<script>alert('data berhasil diubah!');
+      document.location.href='../home.php';</script>";
+     
     
+        }
+    // header("Location: ../home.php");
+
+  }else if(isset($image)){
+  
+    if(!in_array($ekstendGambar,$ektendGambarValid)){
+      echo "<script>alert('bukan  gambar');</script>";
+     
+      exit;
+    }
+    // //cek jika ukuran terlalu besar
+    if($ukuranFile > 1000000){
+      echo "<script>alert('ukuran gambar terlalu besar');</script>";
+     
+      exit;
+    }
+    //lolos cek
+    //generate nama gambar baru
+    
+    $namaFileBaru = uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstendGambar;
+   
+    move_uploaded_file($tmpName,'img/'.$namaFileBaru);
+    // echo "<script>alert('data berhasil ditambah')</script>";
+
+    $query = mysqli_query($conn, "UPDATE product SET namesP = '$name', photos = '$namaFileBaru', descc ='$desc',nutrisi ='$nutrisi',serving_size ='$porsi',id_distribusi ='$iddist' WHERE id=$id");
+//     echo 'berhasil';
  if (mysqli_affected_rows($conn) > 0) {
   echo "<script>alert('data berhasil diubah!');
-  document.location.href='../index.php';</script>";
+  document.location.href='../home.php';</script>";
  
 
     }
   
+
+  }
+
 }
 ?>
 <!doctype html>
@@ -44,7 +89,8 @@ $iddist = $_POST['iddist'];
   <body>
 
  <div class="container">
- <form class="mt-4" method="post" action="">
+ <form class="mt-4" method="post" action="" enctype="multipart/form-data">
+ <input type="hidden" name="gambarLama" value="<?= $result['photos']; ?>">
       <div class="form-row d-block">
    
         <div class="form-group ">
@@ -54,11 +100,18 @@ $iddist = $_POST['iddist'];
         <div class="form-group">
         <div>
         
-        <label for="inputZip">Foto</label>
+        <!-- <label for="inputZip">Foto</label>
         <div class="input-group mb-5">
-  <input type="text" class="form-control" id="inputGroupFile02" name="foto" value="<?= $result['photos']; ?>">
+  <input type="text" class="form-control" id="inputGroupFile02" name="foto" value">
   <label class="input-group-text" for="inputGroupFile02" >Upload</label>
-</div>
+</div> -->
+<label for="inputZip">Foto</label><br>
+<img src="img/<?=$result['photos'] ?>" alt="">
+        <div class="input-group mb-3">
+        
+  <input type="file" class="form-control" id="inputGroupFile02" name="foto">
+  <label class="input-group-text" for="inputGroupFile02">Upload</label>
+</div> 
   <label for="exampleFormControlTextarea1" class="form-label">Description</label>
   <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="description"><?= $result['descc']; ?></textarea>
 </div>

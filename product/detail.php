@@ -29,7 +29,7 @@ WHERE distributor.id=$id");
  <div class="row g-0">
       <div class="col-md-4">
       <?php while ($row = mysqli_fetch_assoc($query)):  ?>
-      <img src="../img/<?=$row['photos'];?>" width="350px" >
+      <img src="img/<?=$row['photos'];?>" width="350px" >
       </div>
       </div>
      
