@@ -1,10 +1,10 @@
 <?php
  require '../conn.php';
   $id = $_GET['id'];
-     $query = mysqli_query($conn, "SELECT * FROM product 
+     $query = mysqli_query($conn, "SELECT product.namesP, product.photos, product.descc, product.nutrisi, product.serving_size, distributor.names FROM product 
 JOIN distributor
 ON product.id_distribusi = distributor.id
-WHERE distributor.id=$id");
+WHERE product.id=$id");
 
 
 ?>

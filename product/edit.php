@@ -37,13 +37,7 @@ $iddist = $_POST['iddist'];
         }
     // header("Location: ../home.php");
 
-  }else if(isset($image)){
-  
-    if(!in_array($ekstendGambar,$ektendGambarValid)){
-      echo "<script>alert('bukan  gambar');</script>";
-     
-      exit;
-    }
+  }
     // //cek jika ukuran terlalu besar
     if($ukuranFile > 1000000){
       echo "<script>alert('ukuran gambar terlalu besar');</script>";

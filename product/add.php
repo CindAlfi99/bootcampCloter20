@@ -3,7 +3,7 @@ session_start();
 require '../conn.php';
 
 if(isset($_POST['submit'])){
-  // var_dump($_POST);
+  // var_dump($_FILES);
   // exit;
   // var_dump($_FILES); die;
 
@@ -108,8 +108,8 @@ $iddist = $_POST['iddist'];
           <input type="text" name="name" class="form-control" id="namesiswa">
         </div>
         <div class="form-group">
-        <div>
-        
+<div>
+                
          <label for="inputZip">Foto</label>
         <div class="input-group mb-3">
   <input type="file" class="form-control" id="inputGroupFile02" name="foto">

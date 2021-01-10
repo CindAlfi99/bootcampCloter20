@@ -1,9 +1,10 @@
 <?php
  require 'conn.php';
  require 'template/template.php';
-$query = mysqli_query($conn, "SELECT * FROM product 
+
+$query = mysqli_query($conn, "SELECT product.id,product.photos, distributor.names ,product.namesP FROM product 
 JOIN distributor
-ON product.id_distribusi = distributor.id");
+ON product.id_distribusi = distributor.id" );
 
 ?>
 <!DOCTYPE html>
